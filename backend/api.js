@@ -17,12 +17,52 @@ app.use(express.json());
 app.get('/api/vehicles', async (req, res) => {
         try {
             const vehicles = await VehicleModel.find();
-            console.log(vehicles)
-            res.json(vehicles);
+            res.status(200).json(vehicles);
         } catch (error) {
-            console.error('Error fetching vehicles:', error);
             res.status(500).json({ error: 'Internal Server Error' });
         }
+});
+
+app.get('/locations', async (req, res) => {
+    try {
+      const uniqueLocations = await VehicleModel.aggregate([
+        { $group: { _id: "$location", locationImage: { $first: "$locationImage" } } }
+      ]);
+  
+      res.status(200).json(uniqueLocations);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
+app.get('/location/:city', async (req, res) => {
+    try {
+      const requestedCity = req.params.city;
+  
+      // Check if the requested city is valid (exists in your dataset)
+      const isValidCity = await VehicleModel.exists({ location: requestedCity });
+  
+      if (!isValidCity) {
+        return res.status(404).json({ error: 'City not found' });
+      }
+  
+      const vehiclesInCity = await VehicleModel.find({ location: requestedCity });
+      res.status(200).json(vehiclesInCity);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+  });
+
+
+app.get('/types', async (req, res) => {
+    try {
+        const types = await VehicleModel.distinct('type');
+        res.status(200).json(types);
+    } catch (error) {
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
 });
 
 //Get a single vehicle
@@ -32,7 +72,7 @@ app.get('/:id', async (req, res) => {
     if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: "Invalid id"})
     }
-    const vehicle = await Vehicle.findById(id)
+    const vehicle = await VehicleModel.findById(id)
 
     if(!vehicle){
         return res.status(404).json({error: 'No such vehicle'})
@@ -60,7 +100,7 @@ app.delete('/:id', async(req, res) =>{
         return res.status(404).json({error: "Invalid id"})
     }
 
-    const vehicle = await Vehicle.findOneAndDelete({_id: id})
+    const vehicle = await VehicleModel.findOneAndDelete({_id: id})
 
     if(!vehicle){
         return res.status(400).json({error: 'No such vehicle'})
@@ -77,7 +117,7 @@ app.patch('/:id', async(req, res) => {
         return res.status(404).json({error: "Invalid id"})
     }
 
-    const vehicle = await Vehicle.findOneAndUpdate({_id: id}, {
+    const vehicle = await VehicleModel.findOneAndUpdate({_id: id}, {
         ...req.body
     })
 

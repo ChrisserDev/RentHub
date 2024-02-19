@@ -1,6 +1,10 @@
 const mongoose = require('mongoose')
 
 const VehicleSchema = new mongoose.Schema({
+    id: {
+        type: String,
+        required: true
+    },
     type: {
         type: String,
         required: true
@@ -41,6 +45,10 @@ const VehicleSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    locationImage: {
+        type: String,
+        required: true
+    }
 })
 
 const VehicleModel = mongoose.model('vehicles', VehicleSchema)

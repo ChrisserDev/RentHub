@@ -6,8 +6,8 @@ export default function Login() {
     const [loginFormData, setLoginFormData] = useState({
         email: "",
         password: "",
-        firstName: "", // Added first name field
-        lastName: "", // Added last name field
+        firstName: "", 
+        lastName: "",
     });
 
   const [status, setStatus] = useState("idle");

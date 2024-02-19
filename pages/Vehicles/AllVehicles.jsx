@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { MdPeopleAlt, MdLocalGasStation } from "react-icons/md";
+import { GiGearStickPattern } from "react-icons/gi";
+import { IoBag } from "react-icons/io5";
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function AllVehicles() {
   const [displayVehicles, setDisplayVehicles] = useState([]);
+  const [types, setTypes] = useState([])
 
   useEffect(() => {
     axios.get('http://localhost:4000/api/vehicles')
@@ -11,27 +16,105 @@ export default function AllVehicles() {
         setDisplayVehicles(response.data);
       })
       .catch(error => console.log('Error fetching vehicles:', error));
-
   }, []);
 
-  const vehicleElements = displayVehicles.map(vehicle => (
+//   useEffect(() => {
+//     axios.get('http://localhost:4000/types')
+//       .then(response => {
+//         console.log(response.data);
+//         setTypes(response.data);
+//       })
+//       .catch(error => console.log('Error fetching vehicles:', error));
+//   }, []);
+
+//   const getTypes = types.map(type => {
+//     return <p>{type}</p>
+//   })
+
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+  
+
+const vehicleElements = displayVehicles.map(vehicle => (
     <div key={vehicle._id} className="vehicle-container">
       <img src={vehicle.image} />
-      <div className="vehicle-info">
+      <div className="vehicle-section-one">
         <h3>{vehicle.carName}</h3>
-        <p>£{vehicle.price}<span>/day</span></p>
+        <strong>£{vehicle.price}<span>/day</span></strong>
       </div>
-      <i className={`vehicle-type ${vehicle.type} selected`}>{vehicle.type}</i>
+      <div className="vehicle-section-two">
+        <p><MdLocalGasStation />{capitalizeFirstLetter(vehicle.fuelType)}</p>
+        <p><GiGearStickPattern />{capitalizeFirstLetter(vehicle.gearType)}</p>
+        <p><MdPeopleAlt />{vehicle.people}</p>
+        <p><IoBag />{vehicle.bags}</p>
+       </div>
+        <details>{vehicle.features}</details>
+        {/* <li>{vehicle.features}</li> */}
+        <Link to={`/booking/${vehicle._id}`}>Select</Link>
     </div>
   ));
 
   return (
-    <div>
-      <h1>Vehicles</h1>
+    <>
+    <form className='search-container'>
+        <div className='selected-choices'>
+            <strong><label htmlFor='vehicleType'>VEHICLE TYPE</label></strong>
+                <select id='vehicleType'>
+                    <option value="">----</option>
+                    <option value="car">Car</option>
+                    <option value="van">Van</option>
+                </select>
+        </div>
+        <div className='selected-choices'>
+            <strong><label htmlFor='transmission'>TRANSMISSION</label></strong>
+                <select id='transmission'>
+                    <option value="">----</option>
+                    <option value="manual">Manual</option>
+                    <option value="automatic">Automatic</option>
+                </select>
+        </div>
+        <div className='selected-choices'>
+            <strong><label htmlFor='fuelType'>FUEL TYPE</label></strong>
+                <select id='fuelType'>
+                    <option value="">----</option>
+                    <option value="petrol">Petrol</option>
+                    <option value="diesel">Diesel</option>
+                    <option value="electric">Electric</option>
+                </select>
+        </div>
+        <div className='selected-choices'>
+            <strong><label htmlFor='passengers'>NUMBER OF PASSENGERS</label></strong>
+                <select id='passengers'>
+                    <option value="">----</option>
+                    <option value="seven">7</option>
+                    <option value="five">5</option>
+                    <option value="four">4</option>
+                    <option value="three">3</option>
+                    <option value="two">2</option>
+                </select>
+        </div>
+    </form>
+    <div className='all-vehicles'>
       {vehicleElements}
     </div>
+  </>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // export default function Cars() {
     // const [searchParams, setSearchParams] = useSearchParams()
