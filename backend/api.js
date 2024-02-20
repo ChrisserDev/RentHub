@@ -23,28 +23,6 @@ app.get('/api/vehicles', async (req, res) => {
         }
 });
 
-// app.get('/api/vehicles', async (req, res) => {
-//     try {
-//         // Extract query parameters from the request
-//         const { vehicleType, gearType, fuelType, people } = req.query;
-
-//         // Build the filter object based on provided query parameters
-//         const filter = {};
-//         if (vehicleType) filter.type = vehicleType;
-//         if (gearType) filter.gearType = gearType;
-//         if (fuelType) filter.fuelType = fuelType;
-//         if (people) filter.people = people;
-
-//         // Use the filter object with the find method
-//         const vehicles = await VehicleModel.find(filter);
-
-//         res.status(200).json(vehicles);
-//     } catch (error) {
-//         console.error(error);
-//         res.status(500).json({ error: 'Internal Server Error' });
-//     }
-// });
-
 app.get('/locations', async (req, res) => {
     try {
       const uniqueLocations = await VehicleModel.aggregate([

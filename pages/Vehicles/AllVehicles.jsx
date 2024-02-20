@@ -18,39 +18,39 @@ export default function AllVehicles() {
     });
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/vehicles${searchParams.toString()}`)
-        .then(response => {
+        axios.get(`http://localhost:4000/api/vehicles`)
+            .then(response => {
                 console.log(response.data);
                 setDisplayVehicles(response.data);
             })
             .catch(error => console.log('Error fetching vehicles:', error));
-    }, [searchParams]);
+    }, []);
 
     const capitalizeFirstLetter = (string) => {
         return string.charAt(0).toUpperCase() + string.slice(1);
     };
 
-    const handleFilterChange = (key, value) => {
+    function handleFilterChange(key, value) {
         const sp = new URLSearchParams(searchParams);
         if (value === null) {
             sp.delete(key);
         } else {
             sp.set(key, value);
         }
-    
-        // Set the searchParams directly, triggering the useEffect in the component
         setSearchParams(sp);
-        
-        navigate(`/AllVehicles${sp.toString() ? `?${sp.toString()}` : ''}`);
     };
 
-    const handleInputChange = (e) => {
+    useEffect(() => {
+        // Trigger the navigation only when searchParams change
+        navigate(`/AllVehicles${searchParams.toString() ? `?${searchParams.toString()}` : ''}`);
+    }, [searchParams, navigate]);
+
+    function handleInputChange(e){
         const { id, value } = e.target;
 
         // Update form data with the new value, keeping the existing values
         setFormData((prevFormData) => {
             const updatedFormData = { ...prevFormData, [id]: value };
-
             // Update query parameters based on the updated form data
             handleFilterChange(id, value);
 
