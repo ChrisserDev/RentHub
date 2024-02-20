@@ -399,13 +399,18 @@ footer {
     height: 35px;
     margin-top: .2em;
     padding: 10px;
+    border-radius: 4px;
+    border: 1px solid gainsboro;
 }
 
 .form-container > section > input {
-    width: 50px;
+    width: 550px;
     height: 35px;
     margin-top: .2em;
     padding: 10px;
+    border-radius: 4px;
+    border: 1px solid gainsboro;
+
 }
 
 .form-container > h2 {
@@ -453,7 +458,6 @@ footer {
     cursor: pointer;
 }
 
-
 .close-modal:hover{
     color: #454545;
 }
@@ -477,9 +481,20 @@ footer {
     background-color: #439446;
 }
 
-.payment-details, .payment-details-two{
-    display: flex;
+.payment-details-card, .payment-details-paypal, .payment-details-two{
     margin-top: 2em;
+}
+
+.payment-modal > h3{
+    padding: 1em 0;
+}
+
+.payment-methods > section {
+    padding: .5em 0;
+}
+
+.payment-methods > section > input {
+    cursor: pointer;
 }
 
 i[class*="van-type-"] {

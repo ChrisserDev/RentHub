@@ -7,22 +7,18 @@ import axios from 'axios';
 
 export default function CityLocation( ) {
     
-    const params = useParams();
-    const [vehiclesInCity, setVehiclesInCity] = useState([]);
+  const params = useParams();
+  const [vehiclesInCity, setVehiclesInCity] = useState([]);
 
-    useEffect(() => {
-      axios.get(`http://localhost:4000/location/${params.city}`)
-        .then(response => {
-          console.log(response.data);
-          setVehiclesInCity(response.data);
-        })
-        .catch(error => console.log('Error fetching vehicles:', error));
+  useEffect(() => {
+    axios.get(`http://localhost:4000/location/${params.city}`)
+      .then(response => {
+        setVehiclesInCity(response.data);
+      })
+      .catch(error => console.log('Error fetching vehicles:', error));
   
-    }, [params.city]);
-  
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-      };
+  }, [params.city]);
+
 
     const displayVehiclesInCity = vehiclesInCity.map(location => {
         return (
@@ -34,8 +30,8 @@ export default function CityLocation( ) {
                 <strong>£{location.price}<span>/day</span></strong>
               </div>
                 <div className="vehicle-section-two-copy">
-                    <p><MdLocalGasStation />{capitalizeFirstLetter(location.fuelType)}</p>
-                    <p><GiGearStickPattern />{capitalizeFirstLetter(location.gearType)}</p>
+                    <p><MdLocalGasStation />{location.fuelType}</p>
+                    <p><GiGearStickPattern />{location.gearType}</p>
                     <p><MdPeopleAlt />{location.people}</p>
                 </div>
                 <details>{location.features}</details>

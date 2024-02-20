@@ -1,9 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
-// import Dashboard from "./pages/Host/Dashboard"
-// import Income from "./pages/Host/Income"
-// import Reviews from "./pages/Host/Reviews"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
 import Login from "./pages/Login"
 import NotFound from "./pages/NotFound"
 import About from "./pages/About"
@@ -28,13 +25,6 @@ function App() {
           <Route path='location/:city' element={<CityLocation />}/>
           <Route path='booking/:id' element={<Booking />}/>
           <Route path="login" element={<Login />}/>
-{/* 
-              <Route index element={<Dashboard />} />
-              <Route path="income" element={<Income />} />
-              <Route path="reviews" element={<Reviews />} />
-              </Route>
-            </Route>
-          </Route> */}
           <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

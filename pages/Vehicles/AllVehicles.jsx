@@ -26,9 +26,6 @@ export default function AllVehicles() {
             .catch(error => console.log('Error fetching vehicles:', error));
     }, []);
 
-    const capitalizeFirstLetter = (string) => {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
 
     function handleFilterChange(key, value) {
         const sp = new URLSearchParams(searchParams);
@@ -64,7 +61,7 @@ export default function AllVehicles() {
             });
 
             setFilteredVehicles(newFilteredVehicles);
-            return updatedFormData; // Return the updated form data
+            return updatedFormData;
         });
     };
 
@@ -117,8 +114,8 @@ export default function AllVehicles() {
                             <strong>£{vehicle.price}<span>/day</span></strong>
                         </div>
                         <div className="vehicle-section-two">
-                            <p><MdLocalGasStation />{capitalizeFirstLetter(vehicle.fuelType)}</p>
-                            <p><GiGearStickPattern />{capitalizeFirstLetter(vehicle.gearType)}</p>
+                            <p><MdLocalGasStation />{vehicle.fuelType}</p>
+                            <p><GiGearStickPattern />{vehicle.gearType}</p>
                             <p><MdPeopleAlt />{vehicle.people}</p>
                             <p><IoBag />{vehicle.bags}</p>
                         </div>

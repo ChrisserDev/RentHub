@@ -82,10 +82,10 @@ app.get('/:id', async (req, res) => {
 
 //Post a new vehicle
 app.post('/', async (req, res) => {
-    const {carName, gearType, people} = req.body
+    const {carName, gearType, fuelType, people} = req.body
 
     try {
-        const newVehicle = await Vehicle.create({carName, gearType, people})
+        const newVehicle = await Vehicle.create({carName, gearType, fuelType, people})
         res.status(200).json(newVehicle)
     } catch (error){
         res.status(400).json({error: error.message})
