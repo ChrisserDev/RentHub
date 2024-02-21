@@ -1,0 +1,179 @@
+.vehicles-top-description{
+    text-align: center;
+    margin: 2em auto 0 auto;
+    font-size: 2em;
+    color: #2c3e50;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    width: 800px;
+}
+
+.all-vehicles-container{
+    display: flex;
+    justify-content: center;
+    margin: 4em 2em 5em 2em;
+
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    max-height: 690px;
+    border: 1px solid gray;
+    padding: 0 4em;
+}
+
+.search-container > h2 {
+    border-bottom: 1px solid gray;
+    padding: .5em;
+    text-align: center;
+}
+
+.selected-choices {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5em;
+    border-bottom: 1px solid gray;
+
+}
+
+.clear-filters-btn{
+    padding: .5em;
+    margin: 2em 0;
+    width: fit-content;
+    align-self: center;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    background-color: #905a33; 
+    color: white;
+    cursor: pointer;
+    border: none;
+    font-weight: bold;
+}
+
+.selected-choices > strong {
+    padding-bottom: .5em;
+    text-align: center;
+}
+
+#vehicleType, #gearType, #people, #fuelType, #price{
+    border-radius: 8px;
+    padding: .2em;
+    cursor: pointer;
+    text-align: center;
+}
+
+
+#vehicleType:hover, 
+#gearType:hover, 
+#people:hover, 
+#fuelType:hover, 
+#price:hover, 
+.form-container section > input, 
+.payment-details-card section > input,
+.payment-details-paypal section > input {
+    background-color:  rgb(238, 233, 233);
+}
+
+.vehicle-section-one {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6em 0em 0.6em 0; /* Adjust the right padding to match */
+    border-radius: 8px;
+}
+
+.vehicle-section-one > p, .title-and-price > p {
+    background-color: #905a33; 
+    color: white;
+    padding: .3em .5em;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+
+.vehicle-section-two{
+    display: flex;
+    gap: 35px;
+    font-size: 1.1rem;
+    margin: 1.1em 0 2em 0;
+}
+
+
+.vehicle-container {
+    display: flex;
+    border-radius: 6px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.5em;
+    width: 100%;
+    background-color: #ffff;
+  }
+
+  .vehicle-cards{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 .5em 0 2em;
+    flex: 0 1 calc(50% - 10px);
+  }
+  
+.all-vehicles {
+    margin-left: 2em;
+}
+
+  
+  .vehicle-container img, .vehicle-container-copy img {
+    width: 320px;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 5px 0 0 5px;
+  }
+
+  .vehicle-container:hover {
+    box-shadow: 0 0 10px rgba(0.5, 0.5, 1, 0.6);
+}
+  
+svg{
+    font-size: 1.3rem;
+    padding: .3em .1em 0 0;
+}
+
+#features-icon {
+    font-size: 1.8rem;
+    padding: .1em 0;
+}
+
+.features-container > h4 {
+    display: flex;
+    align-items: center;
+    color: #905a33;
+    cursor: pointer;
+}
+
+.features-container > p {
+    margin-top: .4em;
+}
+
+.vehicle-container > a{
+    align-self: center;
+    background-color: #905a33; 
+    padding: .5em 1em;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+    margin: .5em 1em 1em 1em;
+    cursor: pointer;
+}
+
+.vehicle-container-copy > a {
+    margin-left: 10em;
+}
+
+.vehicle-container > a:hover, .clear-filters-btn:hover, .vehicle-container-copy > a:hover, .form-container > button:hover, .back-button:hover{
+    background-color: #cf7739;
+}
+

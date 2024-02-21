@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import liverpool from '../assets/images/liverpool.avif'
+import liverpool from '../../assets/images/liverpool.avif'
 import axios from 'axios'
+import './Locations.css'
 
 export default function Locations() {
 
@@ -20,7 +21,7 @@ export default function Locations() {
 
   const getLocation = displayLocations.map(location => {
       return (
-        <Link to={`/location/${location._id}`}  key={location._id}>
+        <Link to={`/locations/${location._id}`}  key={location._id}>
           <div className='location-details'>
             <h2>{location._id}</h2>
             <img src={location.locationImage} className='locationImage' alt={location._id}></img>

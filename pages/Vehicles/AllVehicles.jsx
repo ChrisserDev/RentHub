@@ -4,23 +4,35 @@ import { GiGearStickPattern } from "react-icons/gi";
 import { IoBag } from "react-icons/io5";
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import FeaturesUtil from '../../components/FeaturesUtil';
+import './AllVehicles.css';
+
 
 export default function AllVehicles() {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useState(new URLSearchParams());
     const [displayVehicles, setDisplayVehicles] = useState([]);
     const [filteredVehicles, setFilteredVehicles] = useState([]);
-    const [formData, setFormData] = useState({
+
+    const initialFormData = {
         vehicleType: "",
         gearType: "",
         fuelType: "",
         people: "",
-    });
+        price: ""
+      };
+
+      const [formData, setFormData] = useState(initialFormData);
+
+      const handleClearFilters = () => {
+        setFormData(initialFormData);
+        setFilteredVehicles([]);
+        setSearchParams([])
+      };
 
     useEffect(() => {
         axios.get(`http://localhost:4000/api/vehicles`)
             .then(response => {
-                console.log(response.data);
                 setDisplayVehicles(response.data);
             })
             .catch(error => console.log('Error fetching vehicles:', error));
@@ -51,7 +63,7 @@ export default function AllVehicles() {
             // Update query parameters based on the updated form data
             handleFilterChange(id, value);
 
-            const newFilteredVehicles = displayVehicles.filter((vehicle) => {
+            const newFilteredVehicles = [...displayVehicles].filter((vehicle) => {
                 return (
                     (updatedFormData.vehicleType === "" || vehicle.type === updatedFormData.vehicleType) &&
                     (updatedFormData.fuelType === "" || vehicle.fuelType === updatedFormData.fuelType) &&
@@ -60,6 +72,15 @@ export default function AllVehicles() {
                 );
             });
 
+            // Sort the newFilteredVehicles based on the selected price option
+        if (id === 'price') {
+            if (value === 'lowToHigh') {
+            newFilteredVehicles.sort((a, b) => a.price - b.price);
+            } else if (value === 'highToLow') {
+            newFilteredVehicles.sort((a, b) => b.price - a.price);
+            }
+        }
+
             setFilteredVehicles(newFilteredVehicles);
             return updatedFormData;
         });
@@ -67,9 +88,12 @@ export default function AllVehicles() {
 
     return (
         <>
+        <h5 className='vehicles-top-description'>Explore the selection of our cars and discover the perfect match for your needs.</h5>
+        <div className='all-vehicles-container'>
             <form className='search-container'>
+                <h2>Filters</h2>
                 <div className='selected-choices'>
-                    <strong><label htmlFor='vehicleType'>VEHICLE TYPE</label></strong>
+                    <strong><label htmlFor='vehicleType'>Vehicle Type</label></strong>
                     <select id='vehicleType' value={formData.vehicleType} onChange={(e) => handleInputChange(e)}>
                         <option value="">----</option>
                         <option value="car">Car</option>
@@ -77,24 +101,24 @@ export default function AllVehicles() {
                     </select>
                 </div>
                 <div className='selected-choices'>
-                    <strong><label htmlFor='gearType'>TRANSMISSION</label></strong>
+                    <strong><label htmlFor='gearType'>Transmission</label></strong>
                     <select id='gearType' value={formData.gearType} onChange={(e) => handleInputChange(e)}>
                         <option value="">----</option>
-                        <option value="manual">Manual</option>
-                        <option value="automatic">Automatic</option>
+                        <option value="Manual">Manual</option>
+                        <option value="Automatic">Automatic</option>
                     </select>
                 </div>
                 <div className='selected-choices'>
-                    <strong><label htmlFor='fuelType'>FUEL TYPE</label></strong>
+                    <strong><label htmlFor='fuelType'>Fuel Type</label></strong>
                     <select id='fuelType' value={formData.fuelType} onChange={(e) => handleInputChange(e)}>
                         <option value="">----</option>
-                        <option value="petrol">Petrol</option>
-                        <option value="diesel">Diesel</option>
-                        <option value="electric">Electric</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Electric">Electric</option>
                     </select>
                 </div>
                 <div className='selected-choices'>
-                    <strong><label htmlFor='people'>NUMBER OF PASSENGERS</label></strong>
+                    <strong><label htmlFor='people'>Number of Passengers</label></strong>
                     <select id='people' value={formData.people} onChange={(e) => handleInputChange(e)}>
                         <option value="">----</option>
                         <option value="7">7</option>
@@ -103,15 +127,25 @@ export default function AllVehicles() {
                         <option value="3">3</option>
                         <option value="2">2</option>
                     </select>
+                </div>
+                <div className='selected-choices'>
+                    <strong><label htmlFor='price'>Price</label></strong>
+                    <select id='price' value={formData.price} onChange={(e) => handleInputChange(e)}>
+                        <option value="">----</option>
+                        <option value="lowToHigh">Low To High</option>
+                        <option value="highToLow">High To Low</option>
+                    </select>
                 </div> 
+                <button type='button' className='clear-filters-btn' onClick={handleClearFilters}>Clear Filters</button>
             </form>
             <div className='all-vehicles'>
                 {(filteredVehicles.length > 0 ? filteredVehicles : displayVehicles).map(vehicle => (
                     <div key={vehicle._id} className="vehicle-container">
                         <img src={vehicle.image} alt={vehicle.carName} />
+                        <div className='vehicle-cards'>
                         <div className="vehicle-section-one">
-                            <h3>{vehicle.carName}</h3>
-                            <strong>£{vehicle.price}<span>/day</span></strong>
+                            <h2>{vehicle.carName}</h2>
+                            <p>£{vehicle.price}<strong>/day</strong></p>
                         </div>
                         <div className="vehicle-section-two">
                             <p><MdLocalGasStation />{vehicle.fuelType}</p>
@@ -119,11 +153,15 @@ export default function AllVehicles() {
                             <p><MdPeopleAlt />{vehicle.people}</p>
                             <p><IoBag />{vehicle.bags}</p>
                         </div>
-                        <details>{vehicle.features}</details>
+                        <div className='features-container'>
+                        <FeaturesUtil vehicle={vehicle}/>
+                        </div>
+                        </div>
                         <Link to={`/booking/${vehicle._id}`}>Select</Link>
                     </div>
                 ))}
             </div>
+        </div>
         </>
     )
 }

@@ -1,0 +1,45 @@
+/*** HOME PAGE ***/
+.home-container {
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.46)),
+        url("./assets/images/car-cover.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 350px;
+    color: white;
+    padding: 45px 23px;
+    height: 81vh;
+}
+
+.home-container h1 {
+    font-weight: 700;
+    font-size: 2.25rem;
+    line-height: 42px;
+    text-align: center;
+}
+
+.home-container p {
+    line-height: 24px;
+    text-align: center;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.home-container a {
+    display: flex;
+    text-align: center;
+    background-color: rgb(144, 90, 51);
+    width: fit-content;
+    margin: 5em auto;
+    padding: 1.5em;
+    color: white;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
+
+.home-container a:hover {
+    box-shadow: 0 0 10px rgba(121, 121, 121, 0.7);
+}

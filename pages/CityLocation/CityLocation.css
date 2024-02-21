@@ -1,0 +1,41 @@
+.city-location {
+    display: flex;
+    flex-direction: column;
+    margin: 2em 10em 4em 10em;
+}
+
+.city-location > h1 {
+    text-align: center;
+}
+
+.vehicle-container-copy {
+    display: flex;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 2px;
+    margin: 3em 0 0 10em;
+    width: 80%;
+    background-color: rgb(255, 255, 255);
+}
+
+.vehicles-in-city img{
+    width: 400px; 
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+  
+.vehicle-container-copy > a{
+    align-self: center;
+    background-color: #905a33; 
+    padding: .5em 1em;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: white;
+    margin: .5em 1em 1em 1em;
+    cursor: pointer;
+}
+
+.vehicle-container-copy > a {
+    margin-left: 10em;
+}

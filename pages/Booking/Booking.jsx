@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { MdPeopleAlt, MdLocalGasStation, MdOutlineKeyboardBackspace } from "react-icons/md";
+import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from "react-icons/io";
 import { GiGearStickPattern } from "react-icons/gi";
 import { IoBag } from "react-icons/io5";
 import { TfiLocationPin } from "react-icons/tfi";
 import { FaPaypal, FaRegCreditCard } from "react-icons/fa";
 import axios from 'axios';
 import Modal from 'react-modal';
+import './Booking.css'
 
 export default function Booking() {
+
+    const navigate = useNavigate();
+
+    const handleGoBack = () => {
+        // Use navigate to go back
+        navigate(-1);
+    };
+
+    const [features, setFeatures] = useState(false);
 
     const [paymentMethod, setPaymentMethod] = useState({
         payment: "card"
@@ -57,7 +68,7 @@ export default function Booking() {
           transform: 'translate(-50%, -50%)',
         },
         overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.6)"
+            backgroundColor: "rgba(0, 0, 0, 0.8)"
         }
       };
 
@@ -75,12 +86,12 @@ export default function Booking() {
 
     return (
         <>
-        <Link to="/" className='back-button'><MdOutlineKeyboardBackspace/>Go Back</Link>
+        <button className='back-button' onClick={handleGoBack}><MdOutlineKeyboardBackspace/>Go Back</button>
         <div className='booking-container'>
             <div className='booking-details'>
                 <section className='title-and-price'>       
                     <h2>{displayVehicle[2]}</h2>
-                    <h4>${displayVehicle[5]}/day</h4>
+                    <p>£{displayVehicle[5]}<strong>/day</strong></p>
                 </section>
                 <img src={displayVehicle[9]}/>
                 <section className='vehicle-details'>
@@ -89,8 +100,13 @@ export default function Booking() {
                     <p><MdPeopleAlt />{displayVehicle[4]}</p>
                     <p><IoBag />{displayVehicle[7]}</p>
                 </section>
-                <h5><TfiLocationPin />Pick-up: {displayVehicle[10]}</h5>
-                <details>{displayVehicle[8]}</details>
+                <div className='features-container'>
+                    <h4 onClick={() => setFeatures(prevValue => !prevValue)}> 
+                        Features {features ? <IoIosArrowDropupCircle id='features-icon' /> : <IoIosArrowDropdownCircle id='features-icon' />} 
+                    </h4>
+                        {features && (<p>{displayVehicle[8].join(' ')}</p>)}                        
+                </div>
+                <p><TfiLocationPin />Pick-up: {displayVehicle[10]}</p>
             </div>
             <form className='form-container'>
                 <h2>Contact Details</h2>
@@ -124,7 +140,7 @@ export default function Booking() {
                 style={customStyles}
             >
                 <form className='payment-modal'>
-                    <h1>Payment Form</h1>
+                    <h2>Payment Form</h2>
                     <button className='close-modal' onClick={() => setIsOpen(false)}>X</button>
                         <h3>Payment Methods</h3>
                         <div className='payment-methods'>
@@ -151,14 +167,16 @@ export default function Booking() {
                         </div>
                         {paymentMethod.payment === 'card' && (
                         <div className='payment-details-card'>
-                            <section>
-                                <strong><label htmlFor="firstName">First Name*</label><br/></strong>
-                                <input type="text" id="firstName" name="firstName" />
-                            </section>
-                            <section>
-                                <strong><label htmlFor="lastName">Last Name*</label><br/></strong>
-                                <input type="text" id="lastName" name="lastName" />
-                            </section>
+                            <div className='name-container'>
+                                <section>
+                                    <strong><label htmlFor="firstName">First Name*</label><br/></strong>
+                                    <input type="text" id="firstName" name="firstName" />
+                                </section>
+                                <section>
+                                    <strong><label htmlFor="lastName">Last Name*</label><br/></strong>
+                                    <input type="text" id="lastName" name="lastName" />
+                                </section>
+                            </div>
                             <section>
                                 <strong><label htmlFor="cardNumber">Card Number*</label><br/></strong>
                                 <input type="text" id="cardNumber" name="cardNumber" />
@@ -178,29 +196,15 @@ export default function Booking() {
            
                 {paymentMethod.payment === 'paypal' && (
                     <div className='payment-details-paypal'>
-                        {/* Render only the PayPal fields */}
                         <section>
-                            <strong>
-                                <label htmlFor="personName">Person Name*</label>
-                                <br />
-                            </strong>
-                            <br />
+                            <strong><label htmlFor="personName">Full Name*</label></strong>
                             <input type="text" id="personName" name="personName" />
                         </section>
-                        <section>
-                            <strong>
-                                <label htmlFor="email">Email*</label>
-                                <br />
-                            </strong>
-                            <br />
+                        <section><strong><label htmlFor="email">Email*</label></strong>
                             <input type="text" id="email" name="email" />
                         </section>
                         <section>
-                            <strong>
-                                <label htmlFor="contactNumber">Contact Number*</label>
-                                <br />
-                            </strong>
-                            <br />
+                            <strong><label htmlFor="contactNumber">Contact Number*</label></strong>
                             <input type="text" id="contactNumber" name="contactNumber" />
                         </section>
                     </div>

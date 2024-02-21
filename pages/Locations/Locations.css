@@ -1,0 +1,52 @@
+
+.locations-container > h1, .city-location > h1 {
+    text-align: center;
+    margin-top: 1em;
+    font-size: 3em;
+    color: #2c3e50;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+    letter-spacing: 2px; 
+  }
+
+.locations-card {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 5em;
+    gap: 4em;
+  }
+  
+.location-details {
+    position: relative;
+    text-align: center;
+  }
+  
+.location-details > h2 {
+    position: absolute;
+    top: 50%; 
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    font-size: 2.2em;
+    color: white;
+  }
+  
+.locationImage, .location-details > img {
+    width: 350px;
+    height: 250px;
+    filter: brightness(60%);
+    border-radius: 12px;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+      filter: brightness(90%);
+    }
+  }
+
+  .locations-details{
+    position: absolute;
+    top: 40%;
+    left: 30%;
+}

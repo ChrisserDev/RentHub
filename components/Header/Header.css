@@ -1,0 +1,59 @@
+header {
+    height: 69px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #4d4d4d;
+    padding: 0 1em;
+    box-shadow: 1px 1px 1px 0px rgba(138, 137, 137, 0.75);
+}
+
+
+
+header .site-logo {
+    color: #2c3e50;
+    margin-right: auto;
+    font-weight: 900;
+    font-size: 25px;
+}
+
+.logo-text{
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+header .site-logo:hover {
+    text-decoration: none;
+}
+
+header > a {
+    text-decoration: none;
+    padding: 5px 20px;
+    font-weight: bold;
+}
+
+header a:hover {
+    color: #4779a8;
+}
+
+header .login-icon {
+    height: 18px;
+    width: 18px;
+    margin: 0 5px 0 0;
+}
+
+header .login-link {
+    display: inline-flex;
+    align-items: center;
+}
+
+nav {
+    display: flex;
+    gap: 2.5em;
+    margin-right: 1.5em;
+}
+
+nav > a {
+    font-weight: bold;
+    color: #2c3e50;
+
+}
