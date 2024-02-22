@@ -15,19 +15,25 @@ export default function Booking() {
     const navigate = useNavigate();
 
     const handleGoBack = () => {
-        // Use navigate to go back
         navigate(-1);
     };
 
     const [features, setFeatures] = useState(false);
-
     const [paymentMethod, setPaymentMethod] = useState({
         payment: "card"
     })
 
-    const [paymentCard, setPaymentCard] = useState({
+    const [contactData, setContactData] = useState({
         firstName: "",
         lastName: "",
+        phoneNumber: "",
+        emailAddress: "",
+        pickUpTime: ""
+    })
+
+    const [paymentCard, setPaymentCard] = useState({
+        fName: "",
+        lName: "",
         cardNumber: "",
         expiry: "",
         cvvNumber: ""
@@ -46,14 +52,11 @@ export default function Booking() {
     useEffect(() => {
         axios.get(`http://localhost:4000/${id}`) 
             .then(response => {
-                console.log(Object.values(response.data));
                 setDisplayVehicle(Object.values(response.data));
             })
             .catch(error => console.log('Error fetching vehicles:', error));
 
     }, [id]);
-
-    console.log(paymentMethod.payment)
 
     Modal.setAppElement(document.getElementById('root'));
     const [isOpen, setIsOpen] = useState(false);
@@ -82,7 +85,44 @@ export default function Booking() {
             }
         })
     }
-    
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        try {
+          const response = await axios.post('http://localhost:4000/api/bookingdata', contactData);
+          console.log(response.data);
+          // Clear form or show success message
+        } catch (error) {
+          console.error('Error sending data', error);
+          // Show error message
+        }
+      }
+
+      function handleBookingDetails(e) {
+        const { name, value } = e.target;
+        
+        setContactData(prevContactData => {
+          if (name in prevContactData) {
+            return {
+              ...prevContactData,
+              [name]: value
+            };
+          } else if (name in paymentCard) {  // Corrected syntax here
+            // Assuming it's a property of paymentCard
+            setPaymentCard(prevPaymentCard => ({
+              ...prevPaymentCard,
+              [name]: value
+            }));
+            return prevContactData;
+          } else { 
+            setPaypalPayment(prevPaypal => ({
+              ...prevPaypal,
+              [name]: value
+            }));
+            return prevContactData;
+          }
+        });
+    }      
 
     return (
         <>
@@ -113,24 +153,24 @@ export default function Booking() {
                 <section className='name-container'>
                     <section>
                         <strong><label htmlFor="firstName">First name*</label><br/></strong>
-                        <input type="text" id="firstName" name="firstName" />
+                        <input type="text" onChange={handleBookingDetails} name="firstName" value={contactData.firstName}/>
                     </section>
                     <section>
                         <strong><label htmlFor="lastName">Last name*</label><br/></strong>
-                        <input type="text" id="lastName" name="lastName" />
+                        <input type="text" onChange={handleBookingDetails} name="lastName" value={contactData.lastName}/>
                     </section>
                 </section>
                 <section>
                     <strong><label htmlFor="phoneNumber">Phone Number*</label></strong><br/>
-                    <input type="text" id="phoneNumber" name="phoneNumber" />
+                    <input type="text" onChange={handleBookingDetails} name="phoneNumber" value={contactData.phoneNumber}/>
                 </section>
                 <section>
-                    <strong><label htmlFor="email">Email Address*</label></strong><br/>
-                    <input type="email" id="email" name="email" />
+                    <strong><label htmlFor="emailAddress">Email Address*</label></strong><br/>
+                    <input type="email" onChange={handleBookingDetails} name="emailAddress" value={contactData.emailAddress}/>
                 </section>
                 <section>
-                    <strong><label htmlFor="pickup">Pickup Time*</label></strong><br/>
-                    <input type="text" id="pickup" name="pickup" />
+                    <strong><label htmlFor="pickUpTime">Pickup Time*</label></strong><br/>
+                    <input type="text" onChange={handleBookingDetails} name="pickUpTime" value={contactData.pickUpTime}/>
                 </section>
                 <button type='button' onClick={() => setIsOpen(true)}>Book Now</button>
             </form>
@@ -169,26 +209,26 @@ export default function Booking() {
                         <div className='payment-details-card'>
                             <div className='name-container'>
                                 <section>
-                                    <strong><label htmlFor="firstName">First Name*</label><br/></strong>
-                                    <input type="text" id="firstName" name="firstName" />
+                                    <strong><label htmlFor="fName">First Name*</label><br/></strong>
+                                    <input type="text" onChange={handleBookingDetails} name="fName" value={paymentCard.fName}/>
                                 </section>
                                 <section>
-                                    <strong><label htmlFor="lastName">Last Name*</label><br/></strong>
-                                    <input type="text" id="lastName" name="lastName" />
+                                    <strong><label htmlFor="lName">Last Name*</label><br/></strong>
+                                    <input type="text" onChange={handleBookingDetails} name="lName" value={paymentCard.lName}/>
                                 </section>
                             </div>
                             <section>
                                 <strong><label htmlFor="cardNumber">Card Number*</label><br/></strong>
-                                <input type="text" id="cardNumber" name="cardNumber" />
+                                <input type="text" onChange={handleBookingDetails} name="cardNumber" value={paymentCard.cardNumber}/>
                             </section>
                          <div className='payment-details-two'>
                                 <section>
                                     <strong><label htmlFor="expiry">Expiry Date*</label><br/></strong>
-                                    <input type="text" id="expiry" name="expiry" />
+                                    <input type="text" onChange={handleBookingDetails} name="expiry" value={paymentCard.expiry}/>
                                 </section>
                                 <section>
-                                    <strong><label htmlFor="cvv">CVV*</label><br/></strong>
-                                    <input type="text" id="cvv" name="cvv" />
+                                    <strong><label htmlFor="cvvNumber">CVV*</label><br/></strong>
+                                    <input type="text" onChange={handleBookingDetails} name="cvvNumber" value={paymentCard.cvvNumber}/>
                                 </section>
                             </div>
                         </div>
@@ -198,18 +238,18 @@ export default function Booking() {
                     <div className='payment-details-paypal'>
                         <section>
                             <strong><label htmlFor="personName">Full Name*</label></strong>
-                            <input type="text" id="personName" name="personName" />
+                            <input type="text" onChange={handleBookingDetails} name="personName" value={paypalPayment.personName}/>
                         </section>
                         <section><strong><label htmlFor="email">Email*</label></strong>
-                            <input type="text" id="email" name="email" />
+                            <input type="text" onChange={handleBookingDetails} name="email" value={paypalPayment.email}/>
                         </section>
                         <section>
                             <strong><label htmlFor="contactNumber">Contact Number*</label></strong>
-                            <input type="text" id="contactNumber" name="contactNumber" />
+                            <input type="text" onChange={handleBookingDetails} name="contactNumber" value={paypalPayment.contactNumber}/>
                         </section>
                     </div>
 )}
-                        <button type='button' className='pay-btn' onClick={() => setIsOpen(false)}>Pay Now</button>
+                        <button type='button' className='pay-btn' onClick={handleSubmit}>Pay Now</button>
                 </form>
             </Modal>
         </div>

@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors')
 const VehicleModel = require('./models/vehicleModel')
+const BookingModel = require('./models/bookingModel')
 
 // Initialize Express app
 const app = express();
@@ -80,17 +81,18 @@ app.get('/:id', async (req, res) => {
     res.status(200).json(vehicle)
 })
 
-//Post a new vehicle
-app.post('/', async (req, res) => {
-    const {carName, gearType, fuelType, people} = req.body
 
+//Post the booking contact details
+app.post('/api/bookingdata', async (req, res) => {
     try {
-        const newVehicle = await Vehicle.create({carName, gearType, fuelType, people})
-        res.status(200).json(newVehicle)
-    } catch (error){
-        res.status(400).json({error: error.message})
+      const newData = new BookingModel(req.body);
+      const savedData = await newData.save();
+      res.status(201).json(savedData);
+    } catch (error) {
+      res.status(400).json({ message: error.message });
     }
-});
+  });
+
 
 //Delete a single vehicle
 app.delete('/:id', async(req, res) =>{

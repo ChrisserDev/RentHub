@@ -7,7 +7,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import FeaturesUtil from '../../components/FeaturesUtil';
 import './AllVehicles.css';
 
-
 export default function AllVehicles() {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useState(new URLSearchParams());
@@ -89,6 +88,7 @@ export default function AllVehicles() {
     return (
         <>
         <h5 className='vehicles-top-description'>Explore the selection of our cars and discover the perfect match for your needs.</h5>
+        {/* <img src={loading} className='loading-svg'/> */}
         <div className='all-vehicles-container'>
             <form className='search-container'>
                 <h2>Filters</h2>
