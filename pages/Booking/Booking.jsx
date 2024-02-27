@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { MdPeopleAlt, MdLocalGasStation, MdOutlineKeyboardBackspace } from "react-icons/md";
 import { IoIosArrowDropdownCircle, IoIosArrowDropupCircle } from "react-icons/io";
 import { GiGearStickPattern } from "react-icons/gi";
@@ -12,120 +12,126 @@ import './Booking.css'
 
 export default function Booking() {
 
-    const navigate = useNavigate();
+// React Router hooks for navigation
+const navigate = useNavigate();
+const returnHome = useNavigate();
 
-    const handleGoBack = () => {
-        navigate(-1);
-    };
+// Event handler for navigating back
+const handleGoBack = () => {
+    navigate(-1);
+};
 
-    const [features, setFeatures] = useState(false);
-    const [paymentMethod, setPaymentMethod] = useState({
-        payment: "card"
-    })
+const [features, setFeatures] = useState(false);
+const [paymentCompleted, setPaymentCompleted] = useState(false);
+const [paymentMethod, setPaymentMethod] = useState({
+    payment: "card"
+})
 
-    const [contactData, setContactData] = useState({
-        firstName: "",
-        lastName: "",
-        phoneNumber: "",
-        emailAddress: "",
-        pickUpTime: ""
-    })
+const [contactData, setContactData] = useState({
+    firstName: "",
+    lastName: "",
+    phoneNumber: "",
+    emailAddress: "",
+    pickUpTime: ""
+})
 
-    const [paymentCard, setPaymentCard] = useState({
-        fName: "",
-        lName: "",
-        cardNumber: "",
-        expiry: "",
-        cvvNumber: ""
-    })
+const [paymentCard, setPaymentCard] = useState({
+    fName: "",
+    lName: "",
+    cardNumber: "",
+    expiry: "",
+    cvvNumber: ""
+})
 
-    const [paypalPayment, setPaypalPayment] = useState({
-        personName: "",
-        email: "",
-        contactNumber: ""
-    })
+const [paypalPayment, setPaypalPayment] = useState({
+    personName: "",
+    email: "",
+    contactNumber: ""
+})
 
 
-    const { id } = useParams();
-    const [displayVehicle, setDisplayVehicle] = useState([]);
+const { id } = useParams();
+const [displayVehicle, setDisplayVehicle] = useState([]);
 
-    useEffect(() => {
-        axios.get(`http://localhost:4000/${id}`) 
-            .then(response => {
-                setDisplayVehicle(Object.values(response.data));
-            })
-            .catch(error => console.log('Error fetching vehicles:', error));
-
+// Fetching vehicles from the server.
+useEffect(() => {
+    axios.get(`http://localhost:4000/${id}`) 
+        .then(response => {
+            setDisplayVehicle(Object.values(response.data));
+        })
+        .catch(error => console.log('Error fetching vehicles:', error));
     }, [id]);
 
-    Modal.setAppElement(document.getElementById('root'));
-    const [isOpen, setIsOpen] = useState(false);
+// Configuring modal styles
+Modal.setAppElement(document.getElementById('root'));
+const [isOpen, setIsOpen] = useState(false);
 
-    const customStyles = {
-        content: {
-          top: '50%',
-          left: '50%',
-          right: 'auto',
-          bottom: 'auto',
-          marginRight: '-50%',
-          transform: 'translate(-50%, -50%)',
-        },
-        overlay: {
-            backgroundColor: "rgba(0, 0, 0, 0.8)"
+const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+    overlay: {
+        backgroundColor: "rgba(0, 0, 0, 0.8)"
+    }
+};
+
+// Event handler for updating payment method
+function handlePaymentMethod(e){
+    const {name, value, type, checked} = e.target
+    setPaymentMethod(prevFormData => {
+        return {
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
         }
-      };
+    })
+}
 
-
-    function handlePaymentMethod(e){
-        const {name, value, type, checked} = e.target
-        setPaymentMethod(prevFormData => {
-            return {
-                ...prevFormData,
-                [name]: type === "checkbox" ? checked : value
-            }
-        })
+//Handling form submission
+async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+        const response = await axios.post('http://localhost:4000/api/bookingdata', contactData);
+        } 
+    catch (error) {
+          console.error('Error sending data', error);
+        }
+        setPaymentCompleted(true);
     }
 
-    async function handleSubmit(e) {
-        e.preventDefault();
-        try {
-          const response = await axios.post('http://localhost:4000/api/bookingdata', contactData);
-          console.log(response.data);
-          // Clear form or show success message
-        } catch (error) {
-          console.error('Error sending data', error);
-          // Show error message
-        }
-      }
-
-      function handleBookingDetails(e) {
-        const { name, value } = e.target;
+// This dynamically updates the state variables (contactData, paymentCard, or paypalPayment) based on the name. 
+//If the name corresponds to a field in contactData, it updates that field; otherwise, it checks if it matches a field in paymentCard or paypalPayment, updating the appropriate state accordingly. 
+function handleBookingDetails(e) {
+    const { name, value } = e.target;
         
-        setContactData(prevContactData => {
-          if (name in prevContactData) {
-            return {
-              ...prevContactData,
-              [name]: value
-            };
-          } else if (name in paymentCard) {  // Corrected syntax here
-            // Assuming it's a property of paymentCard
-            setPaymentCard(prevPaymentCard => ({
-              ...prevPaymentCard,
-              [name]: value
-            }));
+    setContactData(prevContactData => {
+        if (name in prevContactData) {
+        return {
+            ...prevContactData,
+            [name]: value
+        };
+        } else if (name in paymentCard) {
+        setPaymentCard(prevPaymentCard => ({
+            ...prevPaymentCard,
+            [name]: value
+        }));
             return prevContactData;
-          } else { 
+        } else { 
             setPaypalPayment(prevPaypal => ({
-              ...prevPaypal,
-              [name]: value
-            }));
+            ...prevPaypal,
+            [name]: value
+        }));
             return prevContactData;
-          }
+        }
         });
-    }      
+}      
 
-    return (
-        <>
+return (
+    <>
         <button className='back-button' onClick={handleGoBack}><MdOutlineKeyboardBackspace/>Go Back</button>
         <div className='booking-container'>
             <div className='booking-details'>
@@ -140,11 +146,11 @@ export default function Booking() {
                     <p><MdPeopleAlt />{displayVehicle[4]}</p>
                     <p><IoBag />{displayVehicle[7]}</p>
                 </section>
-                <div className='features-container'>
+                <div className='features-container card-features'>
                     <h4 onClick={() => setFeatures(prevValue => !prevValue)}> 
                         Features {features ? <IoIosArrowDropupCircle id='features-icon' /> : <IoIosArrowDropdownCircle id='features-icon' />} 
                     </h4>
-                        {features && (<p>{displayVehicle[8].join(' ')}</p>)}                        
+                    {features && (<p>{displayVehicle[8].join(' ')}</p>)}                        
                 </div>
                 <p><TfiLocationPin />Pick-up: {displayVehicle[10]}</p>
             </div>
@@ -160,25 +166,31 @@ export default function Booking() {
                         <input type="text" onChange={handleBookingDetails} name="lastName" value={contactData.lastName}/>
                     </section>
                 </section>
-                <section>
-                    <strong><label htmlFor="phoneNumber">Phone Number*</label></strong><br/>
-                    <input type="text" onChange={handleBookingDetails} name="phoneNumber" value={contactData.phoneNumber}/>
-                </section>
-                <section>
-                    <strong><label htmlFor="emailAddress">Email Address*</label></strong><br/>
-                    <input type="email" onChange={handleBookingDetails} name="emailAddress" value={contactData.emailAddress}/>
-                </section>
-                <section>
-                    <strong><label htmlFor="pickUpTime">Pickup Time*</label></strong><br/>
-                    <input type="text" onChange={handleBookingDetails} name="pickUpTime" value={contactData.pickUpTime}/>
-                </section>
-                <button type='button' onClick={() => setIsOpen(true)}>Book Now</button>
+                    <section>
+                        <strong><label htmlFor="phoneNumber">Phone Number*</label></strong><br/>
+                        <input type="text" onChange={handleBookingDetails} name="phoneNumber" value={contactData.phoneNumber}/>
+                    </section>
+                    <section>
+                        <strong><label htmlFor="emailAddress">Email Address*</label></strong><br/>
+                        <input type="email" onChange={handleBookingDetails} name="emailAddress" value={contactData.emailAddress}/>
+                    </section>
+                    <section>
+                        <strong><label htmlFor="pickUpTime">Pickup Time*</label></strong><br/>
+                        <input type="text" onChange={handleBookingDetails} name="pickUpTime" value={contactData.pickUpTime}/>
+                    </section>
+                    <button type='button' onClick={() => setIsOpen(true)}>Book Now</button>
             </form>
             <Modal
                 isOpen={isOpen}
                 onRequestClose={() => setIsOpen(false)}
-                style={customStyles}
-            >
+                style={customStyles}>
+
+               {paymentCompleted ? (
+                <div className='payment-submited'>
+                    <h2>Thanks for your payment!</h2>
+                    <button onClick={() => returnHome("/")}>Return to home page.</button>
+                </div>
+                ) : (
                 <form className='payment-modal'>
                     <h2>Payment Form</h2>
                     <button className='close-modal' onClick={() => setIsOpen(false)}>X</button>
@@ -234,25 +246,26 @@ export default function Booking() {
                         </div>
                         )}
            
-                {paymentMethod.payment === 'paypal' && (
-                    <div className='payment-details-paypal'>
-                        <section>
-                            <strong><label htmlFor="personName">Full Name*</label></strong>
-                            <input type="text" onChange={handleBookingDetails} name="personName" value={paypalPayment.personName}/>
-                        </section>
-                        <section><strong><label htmlFor="email">Email*</label></strong>
-                            <input type="text" onChange={handleBookingDetails} name="email" value={paypalPayment.email}/>
-                        </section>
-                        <section>
-                            <strong><label htmlFor="contactNumber">Contact Number*</label></strong>
-                            <input type="text" onChange={handleBookingDetails} name="contactNumber" value={paypalPayment.contactNumber}/>
-                        </section>
-                    </div>
-)}
+                        {paymentMethod.payment === 'paypal' && (
+                            <div className='payment-details-paypal'>
+                                <section>
+                                    <strong><label htmlFor="personName">Full Name*</label></strong>
+                                    <input type="text" onChange={handleBookingDetails} name="personName" value={paypalPayment.personName}/>
+                                </section>
+                                <section><strong><label htmlFor="email">Email*</label></strong>
+                                    <input type="text" onChange={handleBookingDetails} name="email" value={paypalPayment.email}/>
+                                </section>
+                                <section>
+                                    <strong><label htmlFor="contactNumber">Contact Number*</label></strong>
+                                    <input type="text" onChange={handleBookingDetails} name="contactNumber" value={paypalPayment.contactNumber}/>
+                                </section>
+                            </div>
+                        )}
                         <button type='button' className='pay-btn' onClick={handleSubmit}>Pay Now</button>
                 </form>
+                )}
             </Modal>
         </div>
         </>
     );
-}
+};

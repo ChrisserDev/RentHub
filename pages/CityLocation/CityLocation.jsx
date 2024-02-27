@@ -7,7 +7,11 @@ import FeaturesUtil from '../../components/FeaturesUtil';
 import './CityLocation.css'
 
 export default function CityLocation() {
+
+  // Extracting the 'city' parameter from the URL.
   const {city} = useParams();
+
+  // State to store vehicles in the specified city.
   const [vehiclesInCity, setVehiclesInCity] = useState([]);
 
   useEffect(() => {
@@ -18,8 +22,10 @@ export default function CityLocation() {
       .catch(error => console.log('Error fetching vehicles:', error));
   }, [city]);
 
-  const displayVehiclesInCity = vehiclesInCity.map(vehicle => {
-    return (
+return (
+  <div className='city-location'>
+    <h1>Explore our vehicles in {city}</h1>
+    {vehiclesInCity.map(vehicle => (
       <div key={vehicle._id} className='vehicle-container-copy'>
         <img src={vehicle.image} />
         <div className='vehicle-cards'>
@@ -32,19 +38,11 @@ export default function CityLocation() {
             <p><GiGearStickPattern />{vehicle.gearType}</p>
             <p><MdPeopleAlt />{vehicle.people}</p>
           </div>
-          <FeaturesUtil vehicle={vehicle}/>
+          <FeaturesUtil vehicle={vehicle} />
         </div>
         <Link to={`/booking/${vehicle._id}`}>Select</Link>
       </div>
-    );
-  });
-
-
-  return (
-    <div className='city-location'>
-        <h1>Explore our vehicles in {city}</h1>
-        {displayVehiclesInCity}
-    </div>
-  )
+    ))}
+  </div>
+);
 }
-

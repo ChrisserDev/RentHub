@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+// This code defines a Mongoose schema and model for a booking system.
 const BookingSchema = new mongoose.Schema({
     firstName: {
         type: String,
@@ -23,7 +24,6 @@ const BookingSchema = new mongoose.Schema({
     },
 })
 
+//Checking if the mongoose.models.Booking exists before calling mongoose.model('Booking', bookingSchema).
 const BookingModel = mongoose.models.Booking || mongoose.model('Booking', BookingSchema);
 module.exports = BookingModel;
-
-//By checking mongoose.models.Booking before calling mongoose.model('Booking', bookingSchema), you prevent Mongoose from attempting to compile the model again if it's already been compiled.

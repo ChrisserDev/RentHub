@@ -7,8 +7,6 @@ header {
     box-shadow: 1px 1px 1px 0px rgba(138, 137, 137, 0.75);
 }
 
-
-
 header .site-logo {
     color: #2c3e50;
     margin-right: auto;
@@ -55,5 +53,4 @@ nav {
 nav > a {
     font-weight: bold;
     color: #2c3e50;
-
 }

@@ -8,39 +8,34 @@ export default function Locations() {
 
   const [displayLocations, setDisplayLocations] = useState([]);
 
-
   useEffect(() => {
     axios.get(`http://localhost:4000/locations`)
       .then(response => {
-        console.log(response.data);
         setDisplayLocations(response.data);
       })
       .catch(error => console.log('Error fetching vehicles:', error));
 
   }, []);
 
-  const getLocation = displayLocations.map(location => {
-      return (
-        <Link to={`/locations/${location._id}`}  key={location._id}>
+return (
+  <div className='locations-container'>
+    <h1>Explore our locations</h1>
+    <div className='locations-card'>
+      {/* Map through the locations and create links to each location's details page */}
+      {displayLocations.map(location => (
+        <Link to={`/locations/${location._id}`} key={location._id}>
           <div className='location-details'>
             <h2>{location._id}</h2>
-            <img src={location.locationImage} className='locationImage' alt={location._id}></img>
+            <img src={location.locationImage} className='locationImage' alt={location._id} />
           </div>
         </Link>
-      )
-  })
-
-  return (
-    <div className='locations-container'>
-      <h1>Explore our locations</h1>
-      <div className='locations-card'>
-          {getLocation}
-          <div className='location-details'>
-            <h2>Coming Soon...</h2>
-            <img src={liverpool} />
-          </div>
+      ))}
+      <div className='location-details'>
+        <h2>Coming Soon...</h2>
+        <img src={liverpool} alt="Coming Soon" />
       </div>
     </div>
-  );
+  </div>
+);
 }
 

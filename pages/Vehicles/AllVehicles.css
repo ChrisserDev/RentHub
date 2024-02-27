@@ -12,7 +12,6 @@
     display: flex;
     justify-content: center;
     margin: 4em 2em 5em 2em;
-
 }
 
 .search-container {
@@ -37,7 +36,6 @@
     flex-direction: column;
     padding: 1.5em;
     border-bottom: 1px solid gray;
-
 }
 
 .clear-filters-btn{
@@ -66,7 +64,6 @@
     text-align: center;
 }
 
-
 #vehicleType:hover, 
 #gearType:hover, 
 #people:hover, 
@@ -94,14 +91,12 @@
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
-
 .vehicle-section-two{
     display: flex;
     gap: 35px;
     font-size: 1.1rem;
     margin: 1.1em 0 2em 0;
 }
-
 
 .vehicle-container {
     display: flex;
@@ -110,29 +105,29 @@
     margin-bottom: 2.5em;
     width: 100%;
     background-color: #ffff;
-  }
+}
 
-  .vehicle-cards{
+.vehicle-cards{
     display: flex;
     flex-direction: column;
     width: 100%;
     padding: 0 .5em 0 2em;
-    flex: 0 1 calc(50% - 10px);
-  }
-  
-.all-vehicles {
-    margin-left: 2em;
+    flex: 0 1 calc(100% - 5px);
 }
 
-  
-  .vehicle-container img, .vehicle-container-copy img {
+.all-vehicles {
+    margin-left: 2em;
+    width: 70%;
+}
+
+.vehicle-container img, .vehicle-container-copy img {
     width: 320px;
     max-height: 200px;
     object-fit: cover;
     border-radius: 5px 0 0 5px;
-  }
+}
 
-  .vehicle-container:hover {
+.vehicle-container:hover, .vehicle-container-copy:hover {
     box-shadow: 0 0 10px rgba(0.5, 0.5, 1, 0.6);
 }
   
@@ -165,7 +160,7 @@ svg{
     font-weight: bold;
     font-size: 1.1rem;
     color: white;
-    margin: .5em 1em 1em 1em;
+    margin: .5em 4em 1em 4em;
     cursor: pointer;
 }
 
@@ -177,6 +172,16 @@ svg{
     background-color: #cf7739;
 }
 
-.loading-svg {
-    background-color: transparent;
+.no-match-vehicles {
+    display: flex;
+    padding-bottom: .5em;
+}
+
+.no-match-vehicles > svg {
+    font-size: 4rem;
+}
+
+.loader{
+    display: flex;
+    margin: 12.9% auto;    
 }

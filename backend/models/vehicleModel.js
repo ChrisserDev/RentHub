@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 
+//This code defines a Mongoose schema and model for the vehicles.
 const VehicleSchema = new mongoose.Schema({
     id: {
         type: String,
@@ -51,5 +52,6 @@ const VehicleSchema = new mongoose.Schema({
     }
 })
 
+//This creates a Mongoose model name 'VehicleModel' based on the 'VehicleSchema' schema.
 const VehicleModel = mongoose.model('vehicles', VehicleSchema)
 module.exports = VehicleModel;

@@ -33,6 +33,14 @@
     padding: 1em 0;
 }
 
+.card-features {
+    width: 80%;
+}
+
+.card-features > h4 {
+    justify-content: center;
+}
+
 
 .booking-details > img{
     width: 400px;
@@ -42,7 +50,7 @@
 
 .booking-details > p {
     font-size: 1rem;
-    padding-bottom: 1em;
+    padding: 1em;
 }
 
 .back-button {
@@ -56,6 +64,7 @@
     color: white;
     border: none;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .back-button svg {
@@ -76,7 +85,7 @@
 .title-and-price{
     display: flex;
     align-items: center;
-    gap: 145px;
+    gap: 130px;
     padding-bottom: .4em;
 }
 
@@ -101,4 +110,23 @@
     padding: 10px;
     border-radius: 4px;
     border: 1px solid gainsboro;
+}
+
+.payment-submited {
+    padding: 2em;
+    text-align: center;
+}
+
+.payment-submited > button {
+    margin-top: 2em;
+    background-color: #905a33;
+    border: none;
+    padding: .8em;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+}
+
+.payment-submited > button:hover {
+    background-color: #ff8c38;
 }
