@@ -4,22 +4,22 @@ https://rentavehiclehub.netlify.app/
 
 ## Overview
 
-RenHub is a web application designed to streamline the process of vehicle rental and booking. With an intuitive user interface, users can explore a diverse fleet of vehicles, view detailed information including pricing, fuel type, gear type, and seating capacity, and seamlessly initiate the booking process. 
+RenHub is a full stack web application designed to streamline the process of vehicle rental and booking. With an intuitive user interface, users can explore a diverse fleet of vehicles, view detailed information including pricing, fuel type, gear type, and seating capacity, and seamlessly initiate the booking process. 
 RenHub also incorporates dynamic filtering, enabling users to refine their vehicle search based on specific criteria.
 The booking process is user-centric, guiding individuals to provide essential contact details for a smooth transaction. 
 The project prioritizes a responsive design, ensuring optimal user experience across different devices. Additionally, the implementation of loading animations enhances user engagement during data fetching.
 
 ## Features
 
+### Vehicle Selection
+
+Users can view a diverse range of vehicles available for rent. Vehicle details include images, names, pricing, fuel type, gear type, seating capacity, and luggage space.
+
 ### Location Exploration
 
 Users can explore different rental locations. Each location is represented with an image and an identifier.
 
-### Vehicle Selection:
-
-Users can view a diverse range of vehicles available for rent. Vehicle details include images, names, pricing, fuel type, gear type, seating capacity, and luggage space.
-
-### Booking Process:
+### Booking Process
 
 Users can initiate the booking process by selecting a vehicle. They provide essential contact details such as name, phone number, email, and pickup time.
 
