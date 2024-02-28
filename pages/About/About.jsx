@@ -1,5 +1,5 @@
 import React from "react"
-import bgImg from "../../assets/images/about-cover.jpg"
+import bgImg from "../../images/about-cover.jpg"
 import './About.css'
 
 export default function About() {
