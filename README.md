@@ -6,7 +6,6 @@ RenHub is a web application designed to streamline the process of vehicle rental
 RenHub also incorporates dynamic filtering, enabling users to refine their vehicle search based on specific criteria.
 The booking process is user-centric, guiding individuals to provide essential contact details for a smooth transaction. 
 The project prioritizes a responsive design, ensuring optimal user experience across different devices. Additionally, the implementation of loading animations enhances user engagement during data fetching.
-With a focus on search engine optimization, RenHub optimizes routes and pages for improved online visibility. The project also demonstrates effective error handling, providing informative messages to users in case of unexpected situations.
 
 ## Features
 
