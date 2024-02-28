@@ -20,7 +20,7 @@ export default function Header() {
                 <NavLink to="about" style={({ isActive }) => isActive ? activeStyles : null}>About</NavLink>
                 <NavLink to="AllVehicles" style={({ isActive }) => isActive ? activeStyles : null}>Vehicles</NavLink>
                 <NavLink to="locations" style={({ isActive }) => isActive ? activeStyles : null}>Locations</NavLink>
-                <Link to="login" className="login-link"><img src={imageUrl} className="login-icon"/>Login</Link>
+                {/* <Link to="login" className="login-link"><img src={imageUrl} className="login-icon"/>Login</Link> */}
             </nav>
         </header>
     )

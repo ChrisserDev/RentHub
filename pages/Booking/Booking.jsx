@@ -222,11 +222,11 @@ return (
                             <div className='name-container'>
                                 <section>
                                     <strong><label htmlFor="fName">First Name*</label><br/></strong>
-                                    <input type="text" onChange={handleBookingDetails} name="fName" value={paymentCard.fName}/>
+                                    <input type="text" id='fName' onChange={handleBookingDetails} name="fName" value={paymentCard.fName}/>
                                 </section>
                                 <section>
                                     <strong><label htmlFor="lName">Last Name*</label><br/></strong>
-                                    <input type="text" onChange={handleBookingDetails} name="lName" value={paymentCard.lName}/>
+                                    <input type="text" id='lName' onChange={handleBookingDetails} name="lName" value={paymentCard.lName}/>
                                 </section>
                             </div>
                             <section>

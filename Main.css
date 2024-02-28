@@ -1,0 +1,444 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: #eee9e9;
+    font-family: "Inter", sans-serif;
+}
+
+a {
+    text-decoration: unset;
+    color: unset;
+}
+
+.site-wrapper {
+    min-height: 100vh;
+}
+
+/* 
+.vehicle-type.selected {
+    color: #ffead0;
+} */
+
+/* PAYMENT MODAL */
+
+.payment-modal {
+    max-width: 600px;
+    position: relative;
+    padding: 0 1em;
+}
+
+.payment-modal > h2 {
+    text-align: center;
+    background-color: rgb(144, 90, 51);
+    padding: .3em 1em;
+    color: white;
+    border-radius: 4px;
+    margin: .2em 0 1em 0;
+}
+
+.payment-modal > h4 {
+    margin-top: 1.5em;
+}
+
+.pay-btn {
+    border: none;
+    margin: 2em 0 2em 12em;
+    background-color: #905a33;
+    padding: .5em 1em;
+    border-radius: 8px;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background-color: #ff8c38;
+}
+
+.payment-details-card, 
+.payment-details-paypal, 
+.payment-details-two {
+    margin-top: 1em;
+}
+
+.payment-methods > section {
+    padding: .5em 0 0 0;
+}
+
+.payment-methods > section > input {
+    cursor: pointer;
+}
+
+.payment-details-paypal section {
+    padding-bottom: 1em;
+}
+
+.name-container{
+    display: flex;
+    gap: 50px;
+ }
+
+ .payment-methods {
+    margin-bottom: 2em;
+ }
+
+ .payment-details-card > section, .payment-details-two > section {
+    margin-top: .8em;
+ }
+
+.close-modal {
+    position: absolute;
+    top: -3%;
+    left: 99%;
+    padding: 0 .2em;
+    border: none;
+    background-color: transparent;
+    font-size: 1.3rem;
+    cursor: pointer;
+}
+
+.close-modal:hover{
+    color: #454545;
+}
+
+/* NOT FOUND ERROR */
+
+.not-found-container {
+    padding-inline: 26px;
+    height: 78vh;
+}
+
+.not-found-container .link-button {
+    display: block;
+    width: 15%;
+    margin: 10% auto;
+    background-color: #161616;
+    color: white;
+}
+
+/* MOBILE LAYOUT */
+
+@media (max-width: 426px) {
+
+    .home-container {
+        height: 78.5vh;
+    }
+
+    header {
+        padding: 0;
+    }
+
+    nav {
+        gap: 1em;
+        margin: 1.4em 0 1em 1em;
+    }
+
+    nav > a {
+        font-size: .8rem;
+    }
+
+    header .site-logo {
+        font-size: 1.2rem;
+    }
+
+    .home-container h1 {
+        font-size: 1.5rem;
+    }
+
+    .home-container p{
+        font-size: 1rem;
+        line-height: 1.2em;
+    }
+
+    .home-container a {
+        font-size: .6rem;
+    }
+
+    .about-page-container {
+        flex-direction: column-reverse;
+        margin: 0 1em;
+        height: auto;
+    }
+
+    .about-page-content {
+        width: 100%;
+    }
+
+    .about-page-content h1 {
+        font-size: 1.5rem;
+        margin: 0 0 1em 0;
+        text-align: center;
+    }
+
+    .about-page-content p {
+        margin-bottom: 0;
+    }
+
+    .about-page-container img {
+        width: 80%;
+        margin-bottom: 2em;
+    }
+
+    .vehicles-top-description {
+        margin: 2em auto 0 auto;
+        font-size: 1.4rem;
+        width: auto;
+    }
+
+    .all-vehicles {
+        margin: 2em 0 1em 0;
+        width: 100%;
+    }
+
+    .all-vehicles-container {
+        flex-direction: column;
+    }
+
+    .vehicle-container {
+        flex-direction: column;
+    }
+
+    .vehicle-container img, .vehicle-container-copy img {
+        width: auto;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .vehicle-cards {
+        padding: 1em;
+    }
+
+    .selected-choices {
+        padding: .5em;
+        border-bottom: none;
+        font-size: .8rem;
+    }
+
+    .clear-filters-btn {
+        margin: 1em 0;
+        font-size: .8rem;
+    }
+
+    .locations-container > h1, .city-location > h1 {
+        font-size: 1.8rem;
+    }
+
+    .locationImage, .location-details > img {
+        width: 250px;
+        height: 150px;
+    }
+
+    .locations-card {
+        gap: 2em;
+        margin: 2em 0;
+    }
+
+    .location-details > h2 {
+        font-size: 1.2rem;
+    }
+
+    .vehicle-container-copy {
+        flex-direction: column;
+        margin: 1.5em;
+    }
+
+    .vehicle-container-copy > a {
+        margin-left: 2em;
+    }
+
+    .city-location {
+        margin: 0;
+    }
+
+    .back-button {
+        font-size: .8rem;
+        align-items: center;
+    }
+
+    .booking-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 1em;
+    }
+
+    .booking-details {
+        width: 100%;
+        padding: 1em .5em;
+        margin-bottom: 1em;
+    }
+
+    .booking-details > img {
+        width: 340px;
+        height: 180px;
+    }
+
+    .title-and-price {
+        gap: 110px;
+    }
+
+    .form-container > h2 {
+        font-size: 1.4rem;
+        margin-bottom: .5em;
+    }
+
+    .name-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .form-container > section > input, 
+    .name-container > section > input{
+        width: 345px;
+    }
+
+    .form-container > button {
+        margin: 1em 0 0 7em;
+    }
+
+    .payment-modal {
+        max-width: 300px;
+        height: 550px;
+    }
+
+    .payment-details-card > section > input, 
+    .payment-details-two > section > input, 
+    .payment-details-paypal > section input,
+    #fName, #lName {
+        width: 270px;
+    }
+
+    .pay-btn {
+        margin: 1em 0 1em 3.5em;
+    }
+
+    .payment-submited {
+        padding: 1em;
+    }
+}
+
+@media (max-width: 769px) {
+
+    .home-container > a {
+        padding: 1em;
+    }
+
+    .home-container > h1 {
+        font-size: 1.8rem;
+    }
+
+    .home-container > p {
+        font-size: 1rem;
+    }
+
+    .about-page-container {
+        flex-direction: column-reverse;
+        margin: 1em;
+        height: auto;
+    }
+
+    .about-page-content {
+        padding: 0 1em;
+    }
+
+    .about-page-content > h1{
+        text-align: center;
+    }
+
+    .about-page-container > img {
+        width: 80%;
+        margin-bottom: 2em;
+    }
+
+    .vehicles-top-description {
+        margin: 2em 2em 0 2em;
+        font-size: 1.4rem;
+        width: auto;
+    }
+
+    .all-vehicles {
+        margin: 2em 0 1em 0;
+        width: 100%;
+    }
+
+    .all-vehicles-container {
+        flex-direction: column;
+        margin: 2em 5em;
+    }
+
+    .vehicle-container {
+        flex-direction: column;
+    }
+
+    .vehicle-container img, .vehicle-container-copy img {
+        width: auto;
+        border-radius: 5px 5px 0 0;
+    }
+
+    .vehicle-cards {
+        padding: 1em;
+    }
+
+    .locations-container > h1, .city-location > h1 {
+        font-size: 2rem
+    }
+
+    .locations-card {
+        margin: 2em;
+    }
+
+    .city-location {
+        margin: 0 5em;
+    }
+
+    .vehicle-container-copy {
+        flex-direction: column;
+        width: 100%;
+        margin: 1em;
+    }
+
+    .vehicle-container-copy > a {
+        margin-left: 2em;
+    }
+
+    .booking-container {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .booking-details {
+        width: 100%;
+    }
+
+    .title-and-price {
+        gap: 180px;
+    }
+
+    .name-container > section > input {
+        width: 280px;
+    }
+
+    .name-container {
+        gap: 10px;
+    }
+
+    .form-container > section > input{
+        width: 610px;
+    }
+
+    .payment-details-card > section > input, 
+    .payment-details-two > section > input, 
+    .payment-details-paypal > section input {
+        width: 570px;
+    }
+
+    .form-container > button {
+        margin-left: 16em;
+    }
+
+    .pay-btn {
+        margin: 1em 0 0 12em;
+    }
+}
