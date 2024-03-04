@@ -6,7 +6,7 @@ import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import FeaturesUtil from '../../components/FeaturesUtil';
 import { HiOutlineEmojiSad } from "react-icons/hi";
-import Spinner from '../../public/Spinner.gif'
+import Spinner from '../../../public/Spinner.gif';
 import './AllVehicles.css';
 
 export default function AllVehicles() {
@@ -110,7 +110,7 @@ export default function AllVehicles() {
     useEffect(() => {
         setTimeout(() => {
         setLoading(false);
-        }, 1000);
+        }, 1200);
     }, []);
 
 return (

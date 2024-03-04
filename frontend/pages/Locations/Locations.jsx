@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import liverpool from '../../public/liverpool.avif'
+import liverpool from '../../../public/liverpool.avif'
 import axios from 'axios'
 import './Locations.css'
 

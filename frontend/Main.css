@@ -442,3 +442,30 @@ a {
         margin: 1em 0 0 12em;
     }
 }
+
+@media (min-width: 1024px){
+    .home-container {
+        min-height: 85.4vh;
+    }
+
+    .booking-container{
+        margin: 6.8em 1em;
+    }
+
+    .about-page-cta {
+        margin-top: 15em;
+    }
+
+    .locations-card {
+        margin: 4.1em 5em;
+    }
+
+    .about-page-container {
+        height: 85.4vh;
+        gap: 50px;
+    }
+
+    .about-page-content > p{
+        font-size: 1.2rem;
+    }
+}

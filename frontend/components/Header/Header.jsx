@@ -6,7 +6,6 @@ import './Header.css'
 export default function Header() {
 
     // The activeStyles object defines the styling for the NavLink that is currently active, indicating the page the user is currently on. 
-    // This styling is applied conditionally based on the isActive prop provided by React Router. 
     const activeStyles = {
         fontWeight: "bold",
         textDecoration: "underline",
