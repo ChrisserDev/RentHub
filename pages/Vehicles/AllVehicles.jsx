@@ -41,7 +41,7 @@ export default function AllVehicles() {
 
     // Fetching all the vehicles from the server on component mount
     useEffect(() => {
-        axios.get(`http://localhost:4000/api/vehicles`)
+        axios.get(`https://renthub-ozyk.onrender.com/api/vehicles`)
             .then(response => {
                 setDisplayVehicles(response.data);
             })

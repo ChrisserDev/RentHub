@@ -15,7 +15,7 @@ export default function CityLocation() {
   const [vehiclesInCity, setVehiclesInCity] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/location/${city}`)
+    axios.get(`https://renthub-ozyk.onrender.com/location/${city}`)
       .then(response => {
         setVehiclesInCity(response.data);
       })

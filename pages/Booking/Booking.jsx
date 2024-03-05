@@ -55,7 +55,7 @@ const [displayVehicle, setDisplayVehicle] = useState([]);
 
 // Fetching vehicles from the server.
 useEffect(() => {
-    axios.get(`http://localhost:4000/${id}`) 
+    axios.get(`https://renthub-ozyk.onrender.com/${id}`) 
         .then(response => {
             setDisplayVehicle(Object.values(response.data));
         })
@@ -95,7 +95,7 @@ function handlePaymentMethod(e){
 async function handleSubmit(e) {
     e.preventDefault();
     try {
-        const response = await axios.post('http://localhost:4000/api/bookingdata', contactData);
+        const response = await axios.post('https://renthub-ozyk.onrender.com/api/bookingdata', contactData);
         } 
     catch (error) {
           console.error('Error sending data', error);

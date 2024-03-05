@@ -9,7 +9,7 @@ export default function Locations() {
   const [displayLocations, setDisplayLocations] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:4000/locations`)
+    axios.get(`https://renthub-ozyk.onrender.com/locations`)
       .then(response => {
         setDisplayLocations(response.data);
       })
