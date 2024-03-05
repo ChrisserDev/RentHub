@@ -1,6 +1,6 @@
 # RentHub
 
-https://rentavehiclehub.netlify.app/
+https://renthubvehicle.netlify.app/
 
 ## Overview
 
