@@ -319,6 +319,7 @@ a {
     }
 }
 
+/* TABLET LAYOUT */
 @media (max-width: 769px) {
 
     .home-container > a {
@@ -443,17 +444,13 @@ a {
     }
 }
 
-@media (min-width: 1024px){
+@media (min-width: 1440px){
     .home-container {
-        min-height: 85.4vh;
+        height: 85.4vh;
     }
 
     .booking-container{
         margin: 6.8em 1em;
-    }
-
-    .about-page-cta {
-        margin-top: 15em;
     }
 
     .locations-card {
