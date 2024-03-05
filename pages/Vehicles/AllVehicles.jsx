@@ -110,7 +110,7 @@ export default function AllVehicles() {
     useEffect(() => {
         setTimeout(() => {
         setLoading(false);
-        }, 1200);
+        }, 500);
     }, []);
 
 return (
