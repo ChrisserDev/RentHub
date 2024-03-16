@@ -139,7 +139,7 @@ return (
                     <h2>{displayVehicle[2]}</h2>
                     <p>£{displayVehicle[5]}<strong>/day</strong></p>
                 </section>
-                <img src={displayVehicle[9]}/>
+                <img src={displayVehicle[9]} alt='Image of the selected vehicle'/>
                 <section className='vehicle-details'>
                     <p><MdLocalGasStation />{displayVehicle[6]}</p>
                     <p><GiGearStickPattern />{displayVehicle[3]}</p>
@@ -159,24 +159,24 @@ return (
                 <section className='name-container'>
                     <section>
                         <strong><label htmlFor="firstName">First name*</label><br/></strong>
-                        <input type="text" onChange={handleBookingDetails} name="firstName" value={contactData.firstName}/>
+                        <input type="text" onChange={handleBookingDetails} name="firstName" placeholder='John' value={contactData.firstName}/>
                     </section>
                     <section>
                         <strong><label htmlFor="lastName">Last name*</label><br/></strong>
-                        <input type="text" onChange={handleBookingDetails} name="lastName" value={contactData.lastName}/>
+                        <input type="text" onChange={handleBookingDetails} name="lastName" placeholder='Smith' value={contactData.lastName}/>
                     </section>
                 </section>
                     <section>
                         <strong><label htmlFor="phoneNumber">Phone Number*</label></strong><br/>
-                        <input type="text" onChange={handleBookingDetails} name="phoneNumber" value={contactData.phoneNumber}/>
+                        <input type="text" onChange={handleBookingDetails} name="phoneNumber"  placeholder='0744 444 4444' value={contactData.phoneNumber}/>
                     </section>
                     <section>
                         <strong><label htmlFor="emailAddress">Email Address*</label></strong><br/>
-                        <input type="email" onChange={handleBookingDetails} name="emailAddress" value={contactData.emailAddress}/>
+                        <input type="email" onChange={handleBookingDetails} name="emailAddress" placeholder='johnsmith@gmail.com' value={contactData.emailAddress}/>
                     </section>
                     <section>
                         <strong><label htmlFor="pickUpTime">Pickup Time*</label></strong><br/>
-                        <input type="text" onChange={handleBookingDetails} name="pickUpTime" value={contactData.pickUpTime}/>
+                        <input type="text" onChange={handleBookingDetails} name="pickUpTime" placeholder='12:00' value={contactData.pickUpTime}/>
                     </section>
                     <button type='button' onClick={() => setIsOpen(true)}>Book Now</button>
             </form>
